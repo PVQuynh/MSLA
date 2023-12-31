@@ -13,16 +13,16 @@ public class MSLAProject extends JFrame {
     Random random = new Random(180);
 
     // 60 nut
-    public List<Node> genNode60() {
+    public List<Node> genNode80() {
         List<Node> lstN = new ArrayList<Node>();
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 80; i++) {
             boolean checkNoDup = false;
             int x = 0;
             int y = 0;
             Node n = new Node();
             while (!checkNoDup) {
-                x = (int) ((random.nextFloat() * ((1001 - 100) + 1)) + 100);
-                y = (int) ((random.nextFloat() * ((881 - 200) + 1)) + 200);
+                x = (int) ((random.nextFloat() * ((1001 - 100) + 1)) + 100); // 100 -> 1000
+                y = (int) ((random.nextFloat() * ((881 - 200) + 1)) + 200); // 200 -> 881
                 checkNoDup = noDup(x, y, lstN);
                 n.setSTT("" + (i + 1));
                 n.setX(x);
@@ -34,21 +34,21 @@ public class MSLAProject extends JFrame {
         }
 
         // trong so
-        getFromSTT("1", lstN).setW(4);
-        getFromSTT("18", lstN).setW(4);
-        getFromSTT("48", lstN).setW(4);
+        getFromSTT("1", lstN).setW(2);
+        getFromSTT("18", lstN).setW(2);
+        getFromSTT("48", lstN).setW(2);
 
-        getFromSTT("17", lstN).setW(2);
-        getFromSTT("25", lstN).setW(2);
-        getFromSTT("39", lstN).setW(2);
+        getFromSTT("17", lstN).setW(12);
+        getFromSTT("25", lstN).setW(12);
+        getFromSTT("39", lstN).setW(12);
 
-        getFromSTT("4", lstN).setW(6);
-        getFromSTT("43", lstN).setW(6);
-        getFromSTT("55", lstN).setW(6);
+        getFromSTT("4", lstN).setW(8);
+        getFromSTT("43", lstN).setW(8);
+        getFromSTT("55", lstN).setW(8);
 
-        getFromSTT("5", lstN).setW(14);
-        getFromSTT("8", lstN).setW(14);
-        getFromSTT("20", lstN).setW(14);
+        getFromSTT("7", lstN).setW(3);
+        getFromSTT("55", lstN).setW(3);
+        getFromSTT("78", lstN).setW(3);
 
         getFromSTT("10", lstN).setSTT("0");
         for (int i = 0; i < lstN.size(); i++) {
@@ -101,7 +101,7 @@ public class MSLAProject extends JFrame {
         for (int i = 0; i < lstS.size(); i++) {
             System.out.print(lstS.get(i) + ", ");
         }
-        System.out.println("");
+        System.out.println("end");
     }
 
     public List<String> findChildNode(String n, List<Node> lstN) {
@@ -184,15 +184,16 @@ public class MSLAProject extends JFrame {
     public double heSo(int w) {
         if (w <= 3) {
             return 0.2;
-        } else if (3 < w && w <= 8) {
-            return 0.3;
-        } else if (8 < w && w <= 16) {
-            return 0.5;
+        } else if (3 < w && w <= 10) {
+            return 0.4;
+        } else if (10 < w && w <= 25) {
+            return 0.6;
         }
-        // câu b
-        // else if (16 < w && w <= 32) {
-        //     return 0.7;
-        // }
+        // câu 2
+//         else if (25 < w && w <= 50) {
+//             return 0.8;
+//         }
+
         return 0;
     }
 
@@ -273,17 +274,18 @@ public class MSLAProject extends JFrame {
         }
         w += getFromSTT(n, lstN).getW();
 
-        // Câu a
-        if (w > 16) {
+        // Câu 1
+        if (w > 25) {
             // System.out.println("W > 16 nen end");
             return null;
         }
 
-        //Câu b
-        // if (w > 32) {
-        //     // System.out.println("W > 32 nen end");
-        //     return null;
-        // }
+        //Câu 2
+//         if (w > 50) {
+//             // System.out.println("W > 32 nen end");
+//             return null;
+//         }
+
         double value = calAllCost(temp);
         cost.setValue(value);
         cost.setA(getFromSTT(a, temp));
@@ -429,13 +431,12 @@ public class MSLAProject extends JFrame {
         mslaProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         List<Node> lstN = new ArrayList<>();
-        lstN.addAll(mslaProject.genNode60());
+        lstN.addAll(mslaProject.genNode80());
 
         List<Node> ketQua = new ArrayList<>();
         ketQua.addAll(mslaProject.thucHienThuatToan(lstN));
         mslaProject.showS(mslaProject.findChildNode("0", lstN));
         SwingUtilities.invokeLater(new Runnable() {
-            
             @Override
             public void run() {
                 mslaProject.setTitle("mslaProject");

@@ -17,7 +17,7 @@ public class Node {
     private String STT; // Số thứ tự
     private int x; // toạ độ trục X
     private int y; // toạ độ trục Y
-    private int w; // Tr�?ng số
+    private int w; // Trọng số
     private String nutCha;
     private List<String> nutCon;
 

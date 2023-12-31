@@ -47,8 +47,9 @@ public class Cost {
         int value = (int) getValue();
         System.out.println("Value:" + value);
         System.out.println("Value 1:" + value*0.2);
-        System.out.println("Value 2:" + value*0.3);
-        System.out.println("Value 3:" + value*0.5);
+        System.out.println("Value 2:" + value*0.4);
+        System.out.println("Value 3:" + value*0.6);
+        System.out.println("Value 4:" + value*0.8);
         System.out.println("---------------");
         return;
     }

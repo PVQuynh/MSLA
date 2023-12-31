@@ -95,29 +95,32 @@ public class nNodePanel extends JPanel {
                     //lien ket 1 - xanh lá
                     g2d.setColor(Color.green);
                     g2d.drawLine(x, y, x1, y1);
-                } else if (3 < w && w <= 8) {
+                } else if (3 < w && w <= 10) {
                     //lien ket 2 - tím
                     g2d.setColor(Color.magenta);
                     g2d.drawLine(x, y, x1, y1);
-                } else if (8 < w && w <= 16) {
-                    //lien ket 3 - đ�?
+                }
+                else if (10 < w && w <= 25) {
+                    //lien ket 3 - đỏ
                     g2d.setColor(Color.red);
                     g2d.drawLine(x, y, x1, y1);
                 }
-                else if (w > 16) {
-                    
+                // Câu 1
+                else if (w > 25) {
                     g2d.setColor(Color.darkGray);
                     g2d.drawLine(x, y, x1, y1);
                 }
-                // else if (16 < w && w <= 32) {
-                //     //lk 4 - xanh biển
-                //     g2d.setColor(Color.blue);
-                //     g2d.drawLine(x, y, x1, y1);
-                // } 
-                // else if (w >= 32) {
-                //     g2d.setColor(Color.darkGray);
-                //     g2d.drawLine(x, y, x1, y1);
-                // }
+
+                // Câu 2
+//                 else if (25 < w && w <= 50) {
+//                     //lk 4 - xanh biển
+//                     g2d.setColor(Color.blue);
+//                     g2d.drawLine(x, y, x1, y1);
+//                 }
+//                 else if (w >= 50) {
+//                     g2d.setColor(Color.darkGray);
+//                     g2d.drawLine(x, y, x1, y1);
+//                 }
             }
         }
     }
