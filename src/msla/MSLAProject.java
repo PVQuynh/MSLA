@@ -27,13 +27,13 @@ public class MSLAProject extends JFrame {
                 n.setSTT("" + (i + 1));
                 n.setX(x);
                 n.setY(y);
-                n.setW(1);
+                n.setW(1); // Lưu lương các nút còn lại (trong số)
                 n.setNutCha("0");
                 lstN.add(n);
             }
         }
 
-        // trong so
+        // Lưu lượng của nut
         getFromSTT("1", lstN).setW(2);
         getFromSTT("18", lstN).setW(2);
         getFromSTT("48", lstN).setW(2);
@@ -50,7 +50,9 @@ public class MSLAProject extends JFrame {
         getFromSTT("55", lstN).setW(3);
         getFromSTT("78", lstN).setW(3);
 
+        // Nút trung tâm
         getFromSTT("10", lstN).setSTT("0");
+
         for (int i = 0; i < lstN.size(); i++) {
             // lstN.get(i).printNode();
             if (!lstN.get(i).getSTT().equals("0")) {
@@ -59,14 +61,15 @@ public class MSLAProject extends JFrame {
         }
         // for (int i = 0; i < lstN.size()-1; i++) {
         // for (int j = i+1; j < lstN.size(); j++) {
-        // calCost(lstN.get(i),lstN.get(j)).printCost();
+        // calLink(lstN.get(i),lstN.get(j)).printCost();
         // }
         // }
             System.out.println(lstN);
         return lstN;
     }
 
-    public Cost calCost(Node a, Node b) {
+    // Khoảng cách đề các
+    public Cost calLink(Node a, Node b) {
         Cost cost = new Cost();
         int deltaX = a.getX() - b.getX();
         int deltaY = a.getY() - b.getY();
@@ -180,7 +183,7 @@ public class MSLAProject extends JFrame {
         return w;
     }
 
-    // lien ket
+    // lưu lượng của các liên kết
     public double heSo(int w) {
         if (w <= 3) {
             return 0.2;
@@ -197,6 +200,7 @@ public class MSLAProject extends JFrame {
         return 0;
     }
 
+    // Tổng giá của các liên kết
     public double calAllCost(List<Node> lstN) {
         double temp = 0;
         List<Link> lstLink = new ArrayList<>();
@@ -207,6 +211,7 @@ public class MSLAProject extends JFrame {
         return temp;
     }
 
+    // giá của liên kết
     public double C(Link l, List<Node> lstN) {
         int w = calW(l, lstN);
         double C = l.getDist() * heSo(w);
@@ -250,6 +255,7 @@ public class MSLAProject extends JFrame {
         return null;
     }
 
+    // Tính thỏa hiệp
     public Cost tinhThoaHiep(String a, String b, List<Node> lstN) {
         List<Node> temp = new ArrayList<>();
         for (int i = 0; i < lstN.size(); i++) {
@@ -258,6 +264,7 @@ public class MSLAProject extends JFrame {
                 temp.get(i).getNutCon().add(t);
             }
         }
+
         path00(a, b, temp);
         Cost cost = new Cost();
         String n = nutGanGoc(getFromSTT(b, temp), temp);
@@ -358,7 +365,7 @@ public class MSLAProject extends JFrame {
                 int condition = findChildNode(src, lstN).size() + findParent(src, lstN).size()
                         + findChildNode(dest, lstN).size() + findParent(dest, lstN).size();
                         
-                if (condition <= 4) {
+                if (condition <= 4) { // giới hạn số nút mỗi cây
                     return true;
                 }
             }
@@ -368,8 +375,9 @@ public class MSLAProject extends JFrame {
 
     public List<Node> thucHienThuatToan(List<Node> lstN) {
         double init = calAllCost(lstN);
-        System.out.println("cost ban dau: " + (int)init);
+        System.out.println("Tổng cost ban đầu: " + (int)init);
         boolean kTra = true;
+
         while (kTra) {
             List<Node> lstTemp = new ArrayList<>();
             
@@ -381,9 +389,10 @@ public class MSLAProject extends JFrame {
                         boolean laNutCon = isChild(lstN.get(i).getSTT(), lstN.get(j).getSTT(), lstN);
                         boolean laNutCha = isParent(lstN.get(i).getSTT(), lstN.get(j).getSTT(), lstN);
                         boolean cungNhanh = isFast(lstN.get(i).getSTT(), lstN.get(j).getSTT(), lstN);
+
                         if (!laNutCon) {
                             if (!laNutCha && !cungNhanh) {
-                                
+
                                 for (int k = 0; k < lstN.size(); k++) {
                                     lstTemp.add(new Node(lstN.get(k)));
                                     for (String t : lstN.get(k).getNutCon()) {
@@ -416,12 +425,12 @@ public class MSLAProject extends JFrame {
             kTra = hetThuatToan(init, lstCost);
 
             if (kTra) {
-                System.out.println("noi nut " + temp.getA().getSTT() + " den nut " + temp.getB().getSTT());
+                System.out.println("Nối nút " + temp.getA().getSTT() + " đến nút " + temp.getB().getSTT());
                 path00(temp.getA().getSTT(), temp.getB().getSTT(), lstN);
             }
             init = calAllCost(lstN);
-            System.out.println("init = " +(int) init);
-            System.out.println("het round");
+            System.out.println("Tổng cost: " +(int) init);
+            System.out.println("Hết round.");
         }
         return lstN;
     }
