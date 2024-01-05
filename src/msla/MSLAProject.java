@@ -364,10 +364,13 @@ public class MSLAProject extends JFrame {
 
                 int condition = findChildNode(src, lstN).size() + findParent(src, lstN).size()
                         + findChildNode(dest, lstN).size() + findParent(dest, lstN).size();
-                        
-                if (condition <= 4) { // giới hạn số nút mỗi cây
-                    return true;
-                }
+
+                // câu 3
+//                if (condition <= 4) { // giới hạn số nút mỗi cây là 5
+//                    return true;
+//                }
+
+                return true; // Không giới hạn
             }
         }
         return false;
