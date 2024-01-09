@@ -185,13 +185,31 @@ public class MSLAProject extends JFrame {
 
     // lưu lượng của các liên kết
     public double heSo(int w) {
+
+        //
+        // Sửa theo yêu cau của cô ===============================
+        //
         if (w <= 3) {
             return 0.2;
         } else if (3 < w && w <= 10) {
-            return 0.4;
+            return 0.3;
         } else if (10 < w && w <= 25) {
-            return 0.6;
+            return 0.5;
         }
+        // câu 2
+//         else if (25 < w && w <= 50) {
+//             return 0.6;
+//         }
+        //
+        // Đề bài bài tập lớn ======================================
+        //
+//        if (w <= 3) {
+//            return 0.2;
+//        } else if (3 < w && w <= 10) {
+//            return 0.4;
+//        } else if (10 < w && w <= 25) {
+//            return 0.6;
+//        }
         // câu 2
 //         else if (25 < w && w <= 50) {
 //             return 0.8;
@@ -366,11 +384,11 @@ public class MSLAProject extends JFrame {
                         + findChildNode(dest, lstN).size() + findParent(dest, lstN).size();
 
                 // câu 3
-//                if (condition <= 4) { // giới hạn số nút mỗi cây là 5
-//                    return true;
-//                }
+                if (condition <= 4) { // giới hạn số nút mỗi cây là 5
+                    return true;
+                }
 
-                return true; // Không giới hạn
+//                return true; // Không giới hạn
             }
         }
         return false;
